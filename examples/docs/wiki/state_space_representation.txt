@@ -1,0 +1,4241 @@
+Title: State-space representation
+Source: Wikipedia (State-space representation)
+URL: https://en.wikipedia.org/wiki/State-space_representation
+License: CC BY-SA 4.0
+Fetched-At: 2026-02-04T10:09:17Z
+
+https://en.wikipedia.org/wiki/State-space_representation
+In control engineering and system identification, a state-space representation is a mathematical model of a physical system that uses state variables to track how inputs shape system behavior over time through first-order differential equations or difference equations. These state variables change based on their current values and inputs, while outputs depend on the states and sometimes the inputs too. The state space (also called time-domain approach and equivalent to phase space in certain dynamical systems) is a geometric space where the axes are these state variables, and the system’s state is represented by a state vector.
+For linear, time-invariant, and finite-dimensional systems, the equations can be written in matrix form, offering a compact alternative to the frequency domain’s Laplace transforms for multiple-input and multiple-output (MIMO) systems. Unlike the frequency domain approach, it works for systems beyond just linear ones with zero initial conditions. This approach turns systems theory into an algebraic framework, making it possible to use Kronecker structures for efficient analysis. 
+State-space models are applied in fields such as economics, statistics, computer science, electrical engineering, and neuroscience. In econometrics, for example, state-space models can be used to decompose a time series into trend and cycle, compose individual indicators into a composite index, identify turning points of the business cycle, and estimate GDP using latent and unobserved time series. Many applications rely on the Kalman Filter or a state observer to produce estimates of the current unknown state variables using their previous observations.
+
+
+== State variables ==
+The internal state variables are the smallest possible subset of system variables that can represent the entire state of the system at any given time. The minimum number of state variables required to represent a given system, 
+  
+    
+      
+        n
+      
+    
+    {\displaystyle n}
+  
+, is usually equal to the order of the system's defining differential equation, but not necessarily. If the system is represented in transfer function form, the minimum number of state variables is equal to the order of the transfer function's denominator after it has been reduced to a proper fraction. It is important to understand that converting a state-space realization to a transfer function form may lose some internal information about the system, and may provide a description of a system which is stable, when the state-space realization is unstable at certain points. In electric circuits, the number of state variables is often, though not always, the same as the number of energy storage elements in the circuit such as capacitors and inductors. The state variables defined must be linearly independent, i.e., no state variable can be written as a linear combination of the other state variables.
+
+
+== Linear systems ==
+
+The most general state-space representation of a linear system with 
+  
+    
+      
+        p
+      
+    
+    {\displaystyle p}
+  
+ inputs, 
+  
+    
+      
+        q
+      
+    
+    {\displaystyle q}
+  
+ outputs and 
+  
+    
+      
+        n
+      
+    
+    {\displaystyle n}
+  
+ state variables is written in the following form:
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          A
+        
+        (
+        t
+        )
+        
+          x
+        
+        (
+        t
+        )
+        +
+        
+          B
+        
+        (
+        t
+        )
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=\mathbf {A} (t)\mathbf {x} (t)+\mathbf {B} (t)\mathbf {u} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        
+          C
+        
+        (
+        t
+        )
+        
+          x
+        
+        (
+        t
+        )
+        +
+        
+          D
+        
+        (
+        t
+        )
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=\mathbf {C} (t)\mathbf {x} (t)+\mathbf {D} (t)\mathbf {u} (t)}
+  
+
+where: 
+In this general formulation, all matrices are allowed to be time-variant (i.e. their elements can depend on time); however, in the common LTI case, matrices will be time invariant. The time variable 
+  
+    
+      
+        t
+      
+    
+    {\displaystyle t}
+  
+ can be continuous (e.g. 
+  
+    
+      
+        t
+        ∈
+        
+          R
+        
+      
+    
+    {\displaystyle t\in \mathbb {R} }
+  
+) or discrete (e.g. 
+  
+    
+      
+        t
+        ∈
+        
+          Z
+        
+      
+    
+    {\displaystyle t\in \mathbb {Z} }
+  
+). In the latter case, the time variable 
+  
+    
+      
+        k
+      
+    
+    {\displaystyle k}
+  
+ is usually used instead of 
+  
+    
+      
+        t
+      
+    
+    {\displaystyle t}
+  
+. Hybrid systems allow for time domains that have both continuous and discrete parts. Depending on the assumptions made, the state-space model representation can assume the following forms:
+
+
+=== Example: continuous-time LTI case ===
+Stability and natural response characteristics of a continuous-time LTI system (i.e., linear with matrices that are constant with respect to time) can be studied from the eigenvalues of the matrix 
+  
+    
+      
+        
+          A
+        
+      
+    
+    {\displaystyle \mathbf {A} }
+  
+. The stability of a time-invariant state-space model can be determined by looking at the system's transfer function in factored form. It will then look something like this:
+
+  
+    
+      
+        
+          G
+        
+        (
+        s
+        )
+        =
+        k
+        
+          
+            
+              (
+              s
+              −
+              
+                z
+                
+                  1
+                
+              
+              )
+              (
+              s
+              −
+              
+                z
+                
+                  2
+                
+              
+              )
+              (
+              s
+              −
+              
+                z
+                
+                  3
+                
+              
+              )
+            
+            
+              (
+              s
+              −
+              
+                p
+                
+                  1
+                
+              
+              )
+              (
+              s
+              −
+              
+                p
+                
+                  2
+                
+              
+              )
+              (
+              s
+              −
+              
+                p
+                
+                  3
+                
+              
+              )
+              (
+              s
+              −
+              
+                p
+                
+                  4
+                
+              
+              )
+            
+          
+        
+        .
+      
+    
+    {\displaystyle \mathbf {G} (s)=k{\frac {(s-z_{1})(s-z_{2})(s-z_{3})}{(s-p_{1})(s-p_{2})(s-p_{3})(s-p_{4})}}.}
+  
+
+The denominator of the transfer function is equal to the characteristic polynomial found by taking the determinant of 
+  
+    
+      
+        s
+        
+          I
+        
+        −
+        
+          A
+        
+      
+    
+    {\displaystyle s\mathbf {I} -\mathbf {A} }
+  
+,
+
+  
+    
+      
+        λ
+        (
+        s
+        )
+        =
+        
+          |
+          
+            s
+            
+              I
+            
+            −
+            
+              A
+            
+          
+          |
+        
+        .
+      
+    
+    {\displaystyle \lambda (s)=\left|s\mathbf {I} -\mathbf {A} \right|.}
+  
+
+The roots of this polynomial (the eigenvalues) are the system transfer function's poles (i.e., the singularities where the transfer function's magnitude is unbounded). These poles can be used to analyze whether the system is asymptotically stable or marginally stable. An alternative approach to determining stability, which does not involve calculating eigenvalues, is to analyze the system's Lyapunov stability.
+The zeros found in the numerator of 
+  
+    
+      
+        
+          G
+        
+        (
+        s
+        )
+      
+    
+    {\displaystyle \mathbf {G} (s)}
+  
+ can similarly be used to determine whether the system is minimum phase.
+The system may still be input–output stable (see BIBO stable) even though it is not internally stable. This may be the case if unstable poles are canceled out by zeros (i.e., if those singularities in the transfer function are removable).
+
+
+=== Controllability ===
+
+The state controllability condition implies that it is possible – by admissible inputs – to steer the states from any initial value to any final value within some finite time window. A continuous time-invariant linear state-space model is controllable if and only if
+
+  
+    
+      
+        rank
+        ⁡
+        
+          
+            [
+            
+              
+                
+                  
+                    B
+                  
+                
+                
+                  
+                    A
+                  
+                  
+                    B
+                  
+                
+                
+                  
+                    
+                      A
+                    
+                    
+                      2
+                    
+                  
+                  
+                    B
+                  
+                
+                
+                  ⋯
+                
+                
+                  
+                    
+                      A
+                    
+                    
+                      n
+                      −
+                      1
+                    
+                  
+                  
+                    B
+                  
+                
+              
+            
+            ]
+          
+        
+        =
+        n
+        ,
+      
+    
+    {\displaystyle \operatorname {rank} {\begin{bmatrix}\mathbf {B} &\mathbf {A} \mathbf {B} &\mathbf {A} ^{2}\mathbf {B} &\cdots &\mathbf {A} ^{n-1}\mathbf {B} \end{bmatrix}}=n,}
+  
+
+where rank is the number of linearly independent rows in a matrix, and where n is the number of state variables.
+
+
+=== Observability ===
+
+Observability is a measure for how well internal states of a system can be inferred by knowledge of its external outputs. The observability and controllability of a system are mathematical duals (i.e., as controllability provides that an input is available that brings any initial state to any desired final state, observability provides that knowing an output trajectory provides enough information to predict the initial state of the system).
+A continuous time-invariant linear state-space model is observable if and only if
+
+  
+    
+      
+        rank
+        ⁡
+        
+          
+            [
+            
+              
+                
+                  
+                    C
+                  
+                
+              
+              
+                
+                  
+                    C
+                  
+                  
+                    A
+                  
+                
+              
+              
+                
+                  ⋮
+                
+              
+              
+                
+                  
+                    C
+                  
+                  
+                    
+                      A
+                    
+                    
+                      n
+                      −
+                      1
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+        =
+        n
+        .
+      
+    
+    {\displaystyle \operatorname {rank} {\begin{bmatrix}\mathbf {C} \\\mathbf {C} \mathbf {A} \\\vdots \\\mathbf {C} \mathbf {A} ^{n-1}\end{bmatrix}}=n.}
+  
+
+
+=== Transfer function ===
+The "transfer function" of a continuous time-invariant linear state-space model can be derived in the following way:
+First, taking the Laplace transform of 
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          A
+        
+        
+          x
+        
+        (
+        t
+        )
+        +
+        
+          B
+        
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=\mathbf {A} \mathbf {x} (t)+\mathbf {B} \mathbf {u} (t)}
+  
+
+yields
+
+  
+    
+      
+        s
+        
+          X
+        
+        (
+        s
+        )
+        −
+        
+          x
+        
+        (
+        0
+        )
+        =
+        
+          A
+        
+        
+          X
+        
+        (
+        s
+        )
+        +
+        
+          B
+        
+        
+          U
+        
+        (
+        s
+        )
+        .
+      
+    
+    {\displaystyle s\mathbf {X} (s)-\mathbf {x} (0)=\mathbf {A} \mathbf {X} (s)+\mathbf {B} \mathbf {U} (s).}
+  
+
+Next, we simplify for 
+  
+    
+      
+        
+          X
+        
+        (
+        s
+        )
+      
+    
+    {\displaystyle \mathbf {X} (s)}
+  
+, giving
+
+  
+    
+      
+        (
+        s
+        
+          I
+        
+        −
+        
+          A
+        
+        )
+        
+          X
+        
+        (
+        s
+        )
+        =
+        
+          x
+        
+        (
+        0
+        )
+        +
+        
+          B
+        
+        
+          U
+        
+        (
+        s
+        )
+      
+    
+    {\displaystyle (s\mathbf {I} -\mathbf {A} )\mathbf {X} (s)=\mathbf {x} (0)+\mathbf {B} \mathbf {U} (s)}
+  
+
+and thus
+
+  
+    
+      
+        
+          X
+        
+        (
+        s
+        )
+        =
+        (
+        s
+        
+          I
+        
+        −
+        
+          A
+        
+        
+          )
+          
+            −
+            1
+          
+        
+        
+          x
+        
+        (
+        0
+        )
+        +
+        (
+        s
+        
+          I
+        
+        −
+        
+          A
+        
+        
+          )
+          
+            −
+            1
+          
+        
+        
+          B
+        
+        
+          U
+        
+        (
+        s
+        )
+        .
+      
+    
+    {\displaystyle \mathbf {X} (s)=(s\mathbf {I} -\mathbf {A} )^{-1}\mathbf {x} (0)+(s\mathbf {I} -\mathbf {A} )^{-1}\mathbf {B} \mathbf {U} (s).}
+  
+
+Substituting for 
+  
+    
+      
+        
+          X
+        
+        (
+        s
+        )
+      
+    
+    {\displaystyle \mathbf {X} (s)}
+  
+ in the output equation
+
+  
+    
+      
+        
+          Y
+        
+        (
+        s
+        )
+        =
+        
+          C
+        
+        
+          X
+        
+        (
+        s
+        )
+        +
+        
+          D
+        
+        
+          U
+        
+        (
+        s
+        )
+        ,
+      
+    
+    {\displaystyle \mathbf {Y} (s)=\mathbf {C} \mathbf {X} (s)+\mathbf {D} \mathbf {U} (s),}
+  
+
+giving
+
+  
+    
+      
+        
+          Y
+        
+        (
+        s
+        )
+        =
+        
+          C
+        
+        (
+        (
+        s
+        
+          I
+        
+        −
+        
+          A
+        
+        
+          )
+          
+            −
+            1
+          
+        
+        
+          x
+        
+        (
+        0
+        )
+        +
+        (
+        s
+        
+          I
+        
+        −
+        
+          A
+        
+        
+          )
+          
+            −
+            1
+          
+        
+        
+          B
+        
+        
+          U
+        
+        (
+        s
+        )
+        )
+        +
+        
+          D
+        
+        
+          U
+        
+        (
+        s
+        )
+        .
+      
+    
+    {\displaystyle \mathbf {Y} (s)=\mathbf {C} ((s\mathbf {I} -\mathbf {A} )^{-1}\mathbf {x} (0)+(s\mathbf {I} -\mathbf {A} )^{-1}\mathbf {B} \mathbf {U} (s))+\mathbf {D} \mathbf {U} (s).}
+  
+
+Assuming zero initial conditions 
+  
+    
+      
+        
+          x
+        
+        (
+        0
+        )
+        =
+        
+          0
+        
+      
+    
+    {\displaystyle \mathbf {x} (0)=\mathbf {0} }
+  
+ and a single-input single-output (SISO) system, the transfer function  is defined as the ratio of output and input 
+  
+    
+      
+        G
+        (
+        s
+        )
+        =
+        Y
+        (
+        s
+        )
+        
+          /
+        
+        U
+        (
+        s
+        )
+      
+    
+    {\displaystyle G(s)=Y(s)/U(s)}
+  
+. For a multiple-input multiple-output (MIMO) system, however, this ratio is not defined. Therefore, assuming zero initial conditions, the transfer function matrix is derived from
+
+  
+    
+      
+        
+          Y
+        
+        (
+        s
+        )
+        =
+        
+          G
+        
+        (
+        s
+        )
+        
+          U
+        
+        (
+        s
+        )
+      
+    
+    {\displaystyle \mathbf {Y} (s)=\mathbf {G} (s)\mathbf {U} (s)}
+  
+
+using the method of equating the coefficients which yields
+
+  
+    
+      
+        
+          G
+        
+        (
+        s
+        )
+        =
+        
+          C
+        
+        (
+        s
+        
+          I
+        
+        −
+        
+          A
+        
+        
+          )
+          
+            −
+            1
+          
+        
+        
+          B
+        
+        +
+        
+          D
+        
+        .
+      
+    
+    {\displaystyle \mathbf {G} (s)=\mathbf {C} (s\mathbf {I} -\mathbf {A} )^{-1}\mathbf {B} +\mathbf {D} .}
+  
+
+Consequently, 
+  
+    
+      
+        
+          G
+        
+        (
+        s
+        )
+      
+    
+    {\displaystyle \mathbf {G} (s)}
+  
+ is a matrix with the dimension 
+  
+    
+      
+        q
+        ×
+        p
+      
+    
+    {\displaystyle q\times p}
+  
+ which contains transfer functions for each input output combination. Due to the simplicity of this matrix notation, the state-space representation is commonly used for multiple-input, multiple-output systems. The Rosenbrock system matrix provides a bridge between the state-space representation and its transfer function.
+
+
+=== Canonical realizations ===
+
+Any given transfer function which is strictly proper can easily be transferred into state-space by the following approach (this example is for a 4-dimensional, single-input, single-output system):
+Given a transfer function, expand it to reveal all coefficients in both the numerator and denominator. This should result in the following form:
+
+  
+    
+      
+        
+          G
+        
+        (
+        s
+        )
+        =
+        
+          
+            
+              
+                n
+                
+                  1
+                
+              
+              
+                s
+                
+                  3
+                
+              
+              +
+              
+                n
+                
+                  2
+                
+              
+              
+                s
+                
+                  2
+                
+              
+              +
+              
+                n
+                
+                  3
+                
+              
+              s
+              +
+              
+                n
+                
+                  4
+                
+              
+            
+            
+              
+                s
+                
+                  4
+                
+              
+              +
+              
+                d
+                
+                  1
+                
+              
+              
+                s
+                
+                  3
+                
+              
+              +
+              
+                d
+                
+                  2
+                
+              
+              
+                s
+                
+                  2
+                
+              
+              +
+              
+                d
+                
+                  3
+                
+              
+              s
+              +
+              
+                d
+                
+                  4
+                
+              
+            
+          
+        
+        .
+      
+    
+    {\displaystyle \mathbf {G} (s)={\frac {n_{1}s^{3}+n_{2}s^{2}+n_{3}s+n_{4}}{s^{4}+d_{1}s^{3}+d_{2}s^{2}+d_{3}s+d_{4}}}.}
+  
+
+The coefficients can now be inserted directly into the state-space model by the following approach:
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          
+            [
+            
+              
+                
+                  0
+                
+                
+                  1
+                
+                
+                  0
+                
+                
+                  0
+                
+              
+              
+                
+                  0
+                
+                
+                  0
+                
+                
+                  1
+                
+                
+                  0
+                
+              
+              
+                
+                  0
+                
+                
+                  0
+                
+                
+                  0
+                
+                
+                  1
+                
+              
+              
+                
+                  −
+                  
+                    d
+                    
+                      4
+                    
+                  
+                
+                
+                  −
+                  
+                    d
+                    
+                      3
+                    
+                  
+                
+                
+                  −
+                  
+                    d
+                    
+                      2
+                    
+                  
+                
+                
+                  −
+                  
+                    d
+                    
+                      1
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+        
+          x
+        
+        (
+        t
+        )
+        +
+        
+          
+            [
+            
+              
+                
+                  0
+                
+              
+              
+                
+                  0
+                
+              
+              
+                
+                  0
+                
+              
+              
+                
+                  1
+                
+              
+            
+            ]
+          
+        
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)={\begin{bmatrix}0&1&0&0\\0&0&1&0\\0&0&0&1\\-d_{4}&-d_{3}&-d_{2}&-d_{1}\end{bmatrix}}\mathbf {x} (t)+{\begin{bmatrix}0\\0\\0\\1\end{bmatrix}}\mathbf {u} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        
+          
+            [
+            
+              
+                
+                  
+                    n
+                    
+                      4
+                    
+                  
+                
+                
+                  
+                    n
+                    
+                      3
+                    
+                  
+                
+                
+                  
+                    n
+                    
+                      2
+                    
+                  
+                
+                
+                  
+                    n
+                    
+                      1
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+        
+          x
+        
+        (
+        t
+        )
+        .
+      
+    
+    {\displaystyle \mathbf {y} (t)={\begin{bmatrix}n_{4}&n_{3}&n_{2}&n_{1}\end{bmatrix}}\mathbf {x} (t).}
+  
+
+This state-space realization is called controllable canonical form because the resulting model is guaranteed to be controllable (i.e., because the control enters a chain of integrators, it has the ability to move every state).
+The transfer function coefficients can also be used to construct another type of canonical form
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          
+            [
+            
+              
+                
+                  0
+                
+                
+                  0
+                
+                
+                  0
+                
+                
+                  −
+                  
+                    d
+                    
+                      4
+                    
+                  
+                
+              
+              
+                
+                  1
+                
+                
+                  0
+                
+                
+                  0
+                
+                
+                  −
+                  
+                    d
+                    
+                      3
+                    
+                  
+                
+              
+              
+                
+                  0
+                
+                
+                  1
+                
+                
+                  0
+                
+                
+                  −
+                  
+                    d
+                    
+                      2
+                    
+                  
+                
+              
+              
+                
+                  0
+                
+                
+                  0
+                
+                
+                  1
+                
+                
+                  −
+                  
+                    d
+                    
+                      1
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+        
+          x
+        
+        (
+        t
+        )
+        +
+        
+          
+            [
+            
+              
+                
+                  
+                    n
+                    
+                      4
+                    
+                  
+                
+              
+              
+                
+                  
+                    n
+                    
+                      3
+                    
+                  
+                
+              
+              
+                
+                  
+                    n
+                    
+                      2
+                    
+                  
+                
+              
+              
+                
+                  
+                    n
+                    
+                      1
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)={\begin{bmatrix}0&0&0&-d_{4}\\1&0&0&-d_{3}\\0&1&0&-d_{2}\\0&0&1&-d_{1}\end{bmatrix}}\mathbf {x} (t)+{\begin{bmatrix}n_{4}\\n_{3}\\n_{2}\\n_{1}\end{bmatrix}}\mathbf {u} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        
+          
+            [
+            
+              
+                
+                  0
+                
+                
+                  0
+                
+                
+                  0
+                
+                
+                  1
+                
+              
+            
+            ]
+          
+        
+        
+          x
+        
+        (
+        t
+        )
+        .
+      
+    
+    {\displaystyle \mathbf {y} (t)={\begin{bmatrix}0&0&0&1\end{bmatrix}}\mathbf {x} (t).}
+  
+
+This state-space realization is called observable canonical form because the resulting model is guaranteed to be observable (i.e., because the output exits from a chain of integrators, every state has an effect on the output).
+
+
+=== Proper transfer functions ===
+Transfer functions which are only proper (and not strictly proper) can also be realised quite easily. The trick here is to separate the transfer function into two parts: a strictly proper part and a constant. 
+
+  
+    
+      
+        
+          G
+        
+        (
+        s
+        )
+        =
+        
+          
+            G
+          
+          
+            
+              S
+              P
+            
+          
+        
+        (
+        s
+        )
+        +
+        
+          G
+        
+        (
+        ∞
+        )
+        .
+      
+    
+    {\displaystyle \mathbf {G} (s)=\mathbf {G} _{\mathrm {SP} }(s)+\mathbf {G} (\infty ).}
+  
+
+The strictly proper transfer function can then be transformed into a canonical state-space realization using techniques shown above. The state-space realization of the constant is trivially 
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        
+          G
+        
+        (
+        ∞
+        )
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=\mathbf {G} (\infty )\mathbf {u} (t)}
+  
+. Together we then get a state-space realization with matrices A, B and C determined by the strictly proper part, and matrix D determined by the constant.
+Here is an example to clear things up a bit:
+
+  
+    
+      
+        
+          G
+        
+        (
+        s
+        )
+        =
+        
+          
+            
+              
+                s
+                
+                  2
+                
+              
+              +
+              3
+              s
+              +
+              3
+            
+            
+              
+                s
+                
+                  2
+                
+              
+              +
+              2
+              s
+              +
+              1
+            
+          
+        
+        =
+        
+          
+            
+              s
+              +
+              2
+            
+            
+              
+                s
+                
+                  2
+                
+              
+              +
+              2
+              s
+              +
+              1
+            
+          
+        
+        +
+        1
+      
+    
+    {\displaystyle \mathbf {G} (s)={\frac {s^{2}+3s+3}{s^{2}+2s+1}}={\frac {s+2}{s^{2}+2s+1}}+1}
+  
+
+which yields the following controllable realization
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          
+            [
+            
+              
+                
+                  −
+                  2
+                
+                
+                  −
+                  1
+                
+              
+              
+                
+                  1
+                
+                
+                  0
+                
+              
+            
+            ]
+          
+        
+        
+          x
+        
+        (
+        t
+        )
+        +
+        
+          
+            [
+            
+              
+                
+                  1
+                
+              
+              
+                
+                  0
+                
+              
+            
+            ]
+          
+        
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)={\begin{bmatrix}-2&-1\\1&0\\\end{bmatrix}}\mathbf {x} (t)+{\begin{bmatrix}1\\0\end{bmatrix}}\mathbf {u} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        
+          
+            [
+            
+              
+                
+                  1
+                
+                
+                  2
+                
+              
+            
+            ]
+          
+        
+        
+          x
+        
+        (
+        t
+        )
+        +
+        
+          
+            [
+            
+              
+                
+                  1
+                
+              
+            
+            ]
+          
+        
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)={\begin{bmatrix}1&2\end{bmatrix}}\mathbf {x} (t)+{\begin{bmatrix}1\end{bmatrix}}\mathbf {u} (t)}
+  
+
+Notice how the output also depends directly on the input. This is due to the 
+  
+    
+      
+        
+          G
+        
+        (
+        ∞
+        )
+      
+    
+    {\displaystyle \mathbf {G} (\infty )}
+  
+ constant in the transfer function.
+
+
+=== Feedback ===
+
+A common method for feedback is to multiply the output by a matrix K and setting this as the input to the system: 
+  
+    
+      
+        
+          u
+        
+        (
+        t
+        )
+        =
+        K
+        
+          y
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {u} (t)=K\mathbf {y} (t)}
+  
+.
+Since the values of K are unrestricted the values can easily be negated for negative feedback.
+The presence of a negative sign (the common notation) is merely a notational one and its absence has no impact on the end results.
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        A
+        
+          x
+        
+        (
+        t
+        )
+        +
+        B
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=A\mathbf {x} (t)+B\mathbf {u} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        C
+        
+          x
+        
+        (
+        t
+        )
+        +
+        D
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=C\mathbf {x} (t)+D\mathbf {u} (t)}
+  
+
+becomes
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        A
+        
+          x
+        
+        (
+        t
+        )
+        +
+        B
+        K
+        
+          y
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=A\mathbf {x} (t)+BK\mathbf {y} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        C
+        
+          x
+        
+        (
+        t
+        )
+        +
+        D
+        K
+        
+          y
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=C\mathbf {x} (t)+DK\mathbf {y} (t)}
+  
+
+solving the output equation for 
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)}
+  
+ and substituting in the state equation results in
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          (
+          
+            A
+            +
+            B
+            K
+            
+              
+                (
+                
+                  I
+                  −
+                  D
+                  K
+                
+                )
+              
+              
+                −
+                1
+              
+            
+            C
+          
+          )
+        
+        
+          x
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=\left(A+BK\left(I-DK\right)^{-1}C\right)\mathbf {x} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        
+          
+            (
+            
+              I
+              −
+              D
+              K
+            
+            )
+          
+          
+            −
+            1
+          
+        
+        C
+        
+          x
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=\left(I-DK\right)^{-1}C\mathbf {x} (t)}
+  
+
+The advantage of this is that the eigenvalues of A can be controlled by setting K appropriately through eigendecomposition of 
+  
+    
+      
+        
+          (
+          
+            A
+            +
+            B
+            K
+            
+              
+                (
+                
+                  I
+                  −
+                  D
+                  K
+                
+                )
+              
+              
+                −
+                1
+              
+            
+            C
+          
+          )
+        
+      
+    
+    {\displaystyle \left(A+BK\left(I-DK\right)^{-1}C\right)}
+  
+.
+This assumes that the closed-loop system is controllable or that the unstable eigenvalues of A can be made stable through appropriate choice of K.
+
+
+==== Example ====
+For a strictly proper system D equals zero. Another fairly common situation is when all states are outputs, i.e. y = x, which yields C = I, the identity matrix. This would then result in the simpler equations
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          (
+          
+            A
+            +
+            B
+            K
+          
+          )
+        
+        
+          x
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=\left(A+BK\right)\mathbf {x} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        
+          x
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=\mathbf {x} (t)}
+  
+
+This reduces the necessary eigendecomposition to just 
+  
+    
+      
+        A
+        +
+        B
+        K
+      
+    
+    {\displaystyle A+BK}
+  
+.
+
+
+=== Feedback with setpoint (reference) input ===
+
+In addition to feedback, an input, 
+  
+    
+      
+        r
+        (
+        t
+        )
+      
+    
+    {\displaystyle r(t)}
+  
+, can be added such that 
+  
+    
+      
+        
+          u
+        
+        (
+        t
+        )
+        =
+        −
+        K
+        
+          y
+        
+        (
+        t
+        )
+        +
+        
+          r
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {u} (t)=-K\mathbf {y} (t)+\mathbf {r} (t)}
+  
+.
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        A
+        
+          x
+        
+        (
+        t
+        )
+        +
+        B
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=A\mathbf {x} (t)+B\mathbf {u} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        C
+        
+          x
+        
+        (
+        t
+        )
+        +
+        D
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=C\mathbf {x} (t)+D\mathbf {u} (t)}
+  
+
+becomes
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        A
+        
+          x
+        
+        (
+        t
+        )
+        −
+        B
+        K
+        
+          y
+        
+        (
+        t
+        )
+        +
+        B
+        
+          r
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=A\mathbf {x} (t)-BK\mathbf {y} (t)+B\mathbf {r} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        C
+        
+          x
+        
+        (
+        t
+        )
+        −
+        D
+        K
+        
+          y
+        
+        (
+        t
+        )
+        +
+        D
+        
+          r
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=C\mathbf {x} (t)-DK\mathbf {y} (t)+D\mathbf {r} (t)}
+  
+
+solving the output equation for 
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)}
+  
+ and substituting in the state equation 
+results in
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          (
+          
+            A
+            −
+            B
+            K
+            
+              
+                (
+                
+                  I
+                  +
+                  D
+                  K
+                
+                )
+              
+              
+                −
+                1
+              
+            
+            C
+          
+          )
+        
+        
+          x
+        
+        (
+        t
+        )
+        +
+        B
+        
+          (
+          
+            I
+            −
+            K
+            
+              
+                (
+                
+                  I
+                  +
+                  D
+                  K
+                
+                )
+              
+              
+                −
+                1
+              
+            
+            D
+          
+          )
+        
+        
+          r
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=\left(A-BK\left(I+DK\right)^{-1}C\right)\mathbf {x} (t)+B\left(I-K\left(I+DK\right)^{-1}D\right)\mathbf {r} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        
+          
+            (
+            
+              I
+              +
+              D
+              K
+            
+            )
+          
+          
+            −
+            1
+          
+        
+        C
+        
+          x
+        
+        (
+        t
+        )
+        +
+        
+          
+            (
+            
+              I
+              +
+              D
+              K
+            
+            )
+          
+          
+            −
+            1
+          
+        
+        D
+        
+          r
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=\left(I+DK\right)^{-1}C\mathbf {x} (t)+\left(I+DK\right)^{-1}D\mathbf {r} (t)}
+  
+
+One fairly common simplification to this system is removing D, which reduces the equations to
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          (
+          
+            A
+            −
+            B
+            K
+            C
+          
+          )
+        
+        
+          x
+        
+        (
+        t
+        )
+        +
+        B
+        
+          r
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=\left(A-BKC\right)\mathbf {x} (t)+B\mathbf {r} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        C
+        
+          x
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=C\mathbf {x} (t)}
+  
+
+
+=== Moving object example ===
+A classical linear system is that of one-dimensional movement of an object (e.g., a cart).
+Newton's laws of motion for an object moving horizontally on a plane and attached to a wall with a spring:
+
+  
+    
+      
+        m
+        
+          
+            
+              y
+              ¨
+            
+          
+        
+        (
+        t
+        )
+        =
+        u
+        (
+        t
+        )
+        −
+        b
+        
+          
+            
+              y
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        −
+        k
+        y
+        (
+        t
+        )
+      
+    
+    {\displaystyle m{\ddot {y}}(t)=u(t)-b{\dot {y}}(t)-ky(t)}
+  
+
+where
+
+  
+    
+      
+        y
+        (
+        t
+        )
+      
+    
+    {\displaystyle y(t)}
+  
+ is position; 
+  
+    
+      
+        
+          
+            
+              y
+              ˙
+            
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {y}}(t)}
+  
+ is velocity; 
+  
+    
+      
+        
+          
+            
+              y
+              ¨
+            
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\ddot {y}}(t)}
+  
+ is acceleration
+
+  
+    
+      
+        u
+        (
+        t
+        )
+      
+    
+    {\displaystyle u(t)}
+  
+ is an applied force
+
+  
+    
+      
+        b
+      
+    
+    {\displaystyle b}
+  
+ is the viscous friction coefficient
+
+  
+    
+      
+        k
+      
+    
+    {\displaystyle k}
+  
+ is the spring constant
+
+  
+    
+      
+        m
+      
+    
+    {\displaystyle m}
+  
+ is the mass of the object
+The state equation would then become
+
+  
+    
+      
+        
+          
+            [
+            
+              
+                
+                  
+                    
+                      
+                        
+                          
+                            x
+                          
+                          ˙
+                        
+                      
+                    
+                    
+                      1
+                    
+                  
+                  (
+                  t
+                  )
+                
+              
+              
+                
+                  
+                    
+                      
+                        
+                          
+                            x
+                          
+                          ˙
+                        
+                      
+                    
+                    
+                      2
+                    
+                  
+                  (
+                  t
+                  )
+                
+              
+            
+            ]
+          
+        
+        =
+        
+          
+            [
+            
+              
+                
+                  0
+                
+                
+                  1
+                
+              
+              
+                
+                  −
+                  
+                    
+                      k
+                      m
+                    
+                  
+                
+                
+                  −
+                  
+                    
+                      b
+                      m
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+        
+          
+            [
+            
+              
+                
+                  
+                    
+                      x
+                    
+                    
+                      1
+                    
+                  
+                  (
+                  t
+                  )
+                
+              
+              
+                
+                  
+                    
+                      x
+                    
+                    
+                      2
+                    
+                  
+                  (
+                  t
+                  )
+                
+              
+            
+            ]
+          
+        
+        +
+        
+          
+            [
+            
+              
+                
+                  0
+                
+              
+              
+                
+                  
+                    
+                      1
+                      m
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+        
+          u
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\begin{bmatrix}{\dot {\mathbf {x} }}_{1}(t)\\{\dot {\mathbf {x} }}_{2}(t)\end{bmatrix}}={\begin{bmatrix}0&1\\-{\frac {k}{m}}&-{\frac {b}{m}}\end{bmatrix}}{\begin{bmatrix}\mathbf {x} _{1}(t)\\\mathbf {x} _{2}(t)\end{bmatrix}}+{\begin{bmatrix}0\\{\frac {1}{m}}\end{bmatrix}}\mathbf {u} (t)}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        
+          [
+          
+            
+              
+                
+                  1
+                
+                
+                  0
+                
+              
+            
+          
+          ]
+        
+        
+          [
+          
+            
+              
+                
+                  
+                    
+                      x
+                      
+                        1
+                      
+                    
+                  
+                  (
+                  t
+                  )
+                
+              
+              
+                
+                  
+                    
+                      x
+                      
+                        2
+                      
+                    
+                  
+                  (
+                  t
+                  )
+                
+              
+            
+          
+          ]
+        
+      
+    
+    {\displaystyle \mathbf {y} (t)=\left[{\begin{matrix}1&0\end{matrix}}\right]\left[{\begin{matrix}\mathbf {x_{1}} (t)\\\mathbf {x_{2}} (t)\end{matrix}}\right]}
+  
+
+where
+
+  
+    
+      
+        
+          x
+          
+            1
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle x_{1}(t)}
+  
+ represents the position of the object
+
+  
+    
+      
+        
+          x
+          
+            2
+          
+        
+        (
+        t
+        )
+        =
+        
+          
+            
+              
+                x
+                ˙
+              
+            
+          
+          
+            1
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle x_{2}(t)={\dot {x}}_{1}(t)}
+  
+ is the velocity of the object
+
+  
+    
+      
+        
+          
+            
+              
+                x
+                ˙
+              
+            
+          
+          
+            2
+          
+        
+        (
+        t
+        )
+        =
+        
+          
+            
+              
+                x
+                ¨
+              
+            
+          
+          
+            1
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {x}}_{2}(t)={\ddot {x}}_{1}(t)}
+  
+ is the acceleration of the object
+the output 
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)}
+  
+ is the position of the object
+The controllability test is then
+
+  
+    
+      
+        
+          
+            [
+            
+              
+                
+                  B
+                
+                
+                  A
+                  B
+                
+              
+            
+            ]
+          
+        
+        =
+        
+          
+            [
+            
+              
+                
+                  
+                    
+                      [
+                      
+                        
+                          
+                            0
+                          
+                        
+                        
+                          
+                            
+                              
+                                1
+                                m
+                              
+                            
+                          
+                        
+                      
+                      ]
+                    
+                  
+                
+                
+                  
+                    
+                      [
+                      
+                        
+                          
+                            0
+                          
+                          
+                            1
+                          
+                        
+                        
+                          
+                            −
+                            
+                              
+                                k
+                                m
+                              
+                            
+                          
+                          
+                            −
+                            
+                              
+                                b
+                                m
+                              
+                            
+                          
+                        
+                      
+                      ]
+                    
+                  
+                  
+                    
+                      [
+                      
+                        
+                          
+                            0
+                          
+                        
+                        
+                          
+                            
+                              
+                                1
+                                m
+                              
+                            
+                          
+                        
+                      
+                      ]
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+        =
+        
+          
+            [
+            
+              
+                
+                  0
+                
+                
+                  
+                    
+                      1
+                      m
+                    
+                  
+                
+              
+              
+                
+                  
+                    
+                      1
+                      m
+                    
+                  
+                
+                
+                  −
+                  
+                    
+                      b
+                      
+                        m
+                        
+                          2
+                        
+                      
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+      
+    
+    {\displaystyle {\begin{bmatrix}B&AB\end{bmatrix}}={\begin{bmatrix}{\begin{bmatrix}0\\{\frac {1}{m}}\end{bmatrix}}&{\begin{bmatrix}0&1\\-{\frac {k}{m}}&-{\frac {b}{m}}\end{bmatrix}}{\begin{bmatrix}0\\{\frac {1}{m}}\end{bmatrix}}\end{bmatrix}}={\begin{bmatrix}0&{\frac {1}{m}}\\{\frac {1}{m}}&-{\frac {b}{m^{2}}}\end{bmatrix}}}
+  
+
+which has full rank for all 
+  
+    
+      
+        b
+      
+    
+    {\displaystyle b}
+  
+ and 
+  
+    
+      
+        m
+      
+    
+    {\displaystyle m}
+  
+. This means, that if initial state of the system is known (
+  
+    
+      
+        y
+        (
+        t
+        )
+      
+    
+    {\displaystyle y(t)}
+  
+, 
+  
+    
+      
+        
+          
+            
+              y
+              ˙
+            
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {y}}(t)}
+  
+, 
+  
+    
+      
+        
+          
+            
+              y
+              ¨
+            
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\ddot {y}}(t)}
+  
+), and if the 
+  
+    
+      
+        b
+      
+    
+    {\displaystyle b}
+  
+ and 
+  
+    
+      
+        m
+      
+    
+    {\displaystyle m}
+  
+ are constants, then there is a force 
+  
+    
+      
+        u
+      
+    
+    {\displaystyle u}
+  
+ that could move the cart into any other position in the system.
+The observability test is then
+
+  
+    
+      
+        
+          
+            [
+            
+              
+                
+                  C
+                
+              
+              
+                
+                  C
+                  A
+                
+              
+            
+            ]
+          
+        
+        =
+        
+          
+            [
+            
+              
+                
+                  
+                    
+                      [
+                      
+                        
+                          
+                            1
+                          
+                          
+                            0
+                          
+                        
+                      
+                      ]
+                    
+                  
+                
+              
+              
+                
+                  
+                    
+                      [
+                      
+                        
+                          
+                            1
+                          
+                          
+                            0
+                          
+                        
+                      
+                      ]
+                    
+                  
+                  
+                    
+                      [
+                      
+                        
+                          
+                            0
+                          
+                          
+                            1
+                          
+                        
+                        
+                          
+                            −
+                            
+                              
+                                k
+                                m
+                              
+                            
+                          
+                          
+                            −
+                            
+                              
+                                b
+                                m
+                              
+                            
+                          
+                        
+                      
+                      ]
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+        =
+        
+          
+            [
+            
+              
+                
+                  1
+                
+                
+                  0
+                
+              
+              
+                
+                  0
+                
+                
+                  1
+                
+              
+            
+            ]
+          
+        
+      
+    
+    {\displaystyle {\begin{bmatrix}C\\CA\end{bmatrix}}={\begin{bmatrix}{\begin{bmatrix}1&0\end{bmatrix}}\\{\begin{bmatrix}1&0\end{bmatrix}}{\begin{bmatrix}0&1\\-{\frac {k}{m}}&-{\frac {b}{m}}\end{bmatrix}}\end{bmatrix}}={\begin{bmatrix}1&0\\0&1\end{bmatrix}}}
+  
+
+which also has full rank. Therefore, this system is both controllable and observable.
+
+
+== Nonlinear systems ==
+The more general form of a state-space model can be written as two functions.
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          f
+        
+        (
+        t
+        ,
+        x
+        (
+        t
+        )
+        ,
+        u
+        (
+        t
+        )
+        )
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)=\mathbf {f} (t,x(t),u(t))}
+  
+
+  
+    
+      
+        
+          y
+        
+        (
+        t
+        )
+        =
+        
+          h
+        
+        (
+        t
+        ,
+        x
+        (
+        t
+        )
+        ,
+        u
+        (
+        t
+        )
+        )
+      
+    
+    {\displaystyle \mathbf {y} (t)=\mathbf {h} (t,x(t),u(t))}
+  
+
+The first is the state equation and the latter is the output equation.
+If the function 
+  
+    
+      
+        f
+        (
+        ⋅
+        ,
+        ⋅
+        ,
+        ⋅
+        )
+      
+    
+    {\displaystyle f(\cdot ,\cdot ,\cdot )}
+  
+ is a linear combination of states and inputs then the equations can be written in matrix notation like above.
+The 
+  
+    
+      
+        u
+        (
+        t
+        )
+      
+    
+    {\displaystyle u(t)}
+  
+ argument to the functions can be dropped if the system is unforced (i.e., it has no inputs).
+
+
+=== Pendulum example ===
+A classic nonlinear system is a simple unforced pendulum
+
+  
+    
+      
+        m
+        
+          ℓ
+          
+            2
+          
+        
+        
+          
+            
+              θ
+              ¨
+            
+          
+        
+        (
+        t
+        )
+        =
+        −
+        m
+        ℓ
+        g
+        sin
+        ⁡
+        θ
+        (
+        t
+        )
+        −
+        k
+        ℓ
+        
+          
+            
+              θ
+              ˙
+            
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle m\ell ^{2}{\ddot {\theta }}(t)=-m\ell g\sin \theta (t)-k\ell {\dot {\theta }}(t)}
+  
+
+where
+
+  
+    
+      
+        θ
+        (
+        t
+        )
+      
+    
+    {\displaystyle \theta (t)}
+  
+ is the angle of the pendulum with respect to the direction of gravity
+
+  
+    
+      
+        m
+      
+    
+    {\displaystyle m}
+  
+ is the mass of the pendulum (pendulum rod's mass is assumed to be zero)
+
+  
+    
+      
+        g
+      
+    
+    {\displaystyle g}
+  
+ is the gravitational acceleration
+
+  
+    
+      
+        k
+      
+    
+    {\displaystyle k}
+  
+ is coefficient of friction at the pivot point
+
+  
+    
+      
+        ℓ
+      
+    
+    {\displaystyle \ell }
+  
+ is the radius of the pendulum (to the center of gravity of the mass 
+  
+    
+      
+        m
+      
+    
+    {\displaystyle m}
+  
+)
+The state equations are then
+
+  
+    
+      
+        
+          
+            
+              
+                x
+                ˙
+              
+            
+          
+          
+            1
+          
+        
+        (
+        t
+        )
+        =
+        
+          x
+          
+            2
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {x}}_{1}(t)=x_{2}(t)}
+  
+
+  
+    
+      
+        
+          
+            
+              
+                x
+                ˙
+              
+            
+          
+          
+            2
+          
+        
+        (
+        t
+        )
+        =
+        −
+        
+          
+            g
+            ℓ
+          
+        
+        sin
+        ⁡
+        
+          
+            x
+            
+              1
+            
+          
+        
+        (
+        t
+        )
+        −
+        
+          
+            k
+            
+              m
+              ℓ
+            
+          
+        
+        
+          
+            x
+            
+              2
+            
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle {\dot {x}}_{2}(t)=-{\frac {g}{\ell }}\sin {x_{1}}(t)-{\frac {k}{m\ell }}{x_{2}}(t)}
+  
+
+where
+
+  
+    
+      
+        
+          x
+          
+            1
+          
+        
+        (
+        t
+        )
+        =
+        θ
+        (
+        t
+        )
+      
+    
+    {\displaystyle x_{1}(t)=\theta (t)}
+  
+ is the angle of the pendulum
+
+  
+    
+      
+        
+          x
+          
+            2
+          
+        
+        (
+        t
+        )
+        =
+        
+          
+            
+              
+                x
+                ˙
+              
+            
+          
+          
+            1
+          
+        
+        (
+        t
+        )
+      
+    
+    {\displaystyle x_{2}(t)={\dot {x}}_{1}(t)}
+  
+ is the rotational velocity of the pendulum
+
+  
+    
+      
+        
+          
+            
+              
+                x
+                ˙
+              
+            
+          
+          
+            2
+          
+        
+        =
+        
+          
+            
+              
+                x
+                ¨
+              
+            
+          
+          
+            1
+          
+        
+      
+    
+    {\displaystyle {\dot {x}}_{2}={\ddot {x}}_{1}}
+  
+ is the rotational acceleration of the pendulum
+Instead, the state equation can be written in the general form
+
+  
+    
+      
+        
+          
+            
+              
+                x
+              
+              ˙
+            
+          
+        
+        (
+        t
+        )
+        =
+        
+          
+            [
+            
+              
+                
+                  
+                    
+                      
+                        
+                          x
+                          ˙
+                        
+                      
+                    
+                    
+                      1
+                    
+                  
+                  (
+                  t
+                  )
+                
+              
+              
+                
+                  
+                    
+                      
+                        
+                          x
+                          ˙
+                        
+                      
+                    
+                    
+                      2
+                    
+                  
+                  (
+                  t
+                  )
+                
+              
+            
+            ]
+          
+        
+        =
+        
+          f
+        
+        (
+        t
+        ,
+        x
+        (
+        t
+        )
+        )
+        =
+        
+          
+            [
+            
+              
+                
+                  
+                    x
+                    
+                      2
+                    
+                  
+                  (
+                  t
+                  )
+                
+              
+              
+                
+                  −
+                  
+                    
+                      g
+                      ℓ
+                    
+                  
+                  sin
+                  ⁡
+                  
+                    
+                      x
+                      
+                        1
+                      
+                    
+                  
+                  (
+                  t
+                  )
+                  −
+                  
+                    
+                      k
+                      
+                        m
+                        ℓ
+                      
+                    
+                  
+                  
+                    
+                      x
+                      
+                        2
+                      
+                    
+                  
+                  (
+                  t
+                  )
+                
+              
+            
+            ]
+          
+        
+        .
+      
+    
+    {\displaystyle {\dot {\mathbf {x} }}(t)={\begin{bmatrix}{\dot {x}}_{1}(t)\\{\dot {x}}_{2}(t)\end{bmatrix}}=\mathbf {f} (t,x(t))={\begin{bmatrix}x_{2}(t)\\-{\frac {g}{\ell }}\sin {x_{1}}(t)-{\frac {k}{m\ell }}{x_{2}}(t)\end{bmatrix}}.}
+  
+
+The equilibrium/stationary points of a system are when 
+  
+    
+      
+        
+          
+            
+              x
+              ˙
+            
+          
+        
+        =
+        0
+      
+    
+    {\displaystyle {\dot {x}}=0}
+  
+ and so the equilibrium points of a pendulum are those that satisfy
+
+  
+    
+      
+        
+          
+            [
+            
+              
+                
+                  
+                    x
+                    
+                      1
+                    
+                  
+                
+              
+              
+                
+                  
+                    x
+                    
+                      2
+                    
+                  
+                
+              
+            
+            ]
+          
+        
+        =
+        
+          
+            [
+            
+              
+                
+                  n
+                  π
+                
+              
+              
+                
+                  0
+                
+              
+            
+            ]
+          
+        
+      
+    
+    {\displaystyle {\begin{bmatrix}x_{1}\\x_{2}\end{bmatrix}}={\begin{bmatrix}n\pi \\0\end{bmatrix}}}
+  
+
+for integers n.
+
+
+== See also ==
+
+
+== References ==
+
+
+== Further reading ==
+
+
+== External links ==
+Wolfram language functions for linear state-space models, affine state-space models, and nonlinear state-space models.

@@ -1,0 +1,12 @@
+name: superlinear
+channels:
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.12
+  - pip
+  # Provides nvcc (CUDA compiler) for building GPU extensions when wheels are unavailable.
+  - cuda-toolkit=12.8
+  # Build essentials (used by pip builds for some CUDA extensions)
+  - cxx-compiler
+  - ninja
